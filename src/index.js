@@ -8,8 +8,12 @@ const port = 3000;
 const __dirname = path.resolve(); // need to define this for using es6 module
 app.use(express.static(path.join(__dirname, "src/public")));
 
+//Middleware
+app.use(express.urlencoded({ extended: true })); //form html
+app.use(express.json()); // code javascript: XMLHttpResquest, fetch, axios,...
+
 //HTTP logger
-app.use(morgan("combined"));
+// app.use(morgan("combined"));
 
 //Template engine
 app.engine("hbs", engine({ extname: ".hbs" }));
@@ -19,7 +23,14 @@ app.set("views", path.join(__dirname, "src/resource/views"));
 
 app.get("/", (req, res) => res.render("home"));
 app.get("/news", (req, res) => res.render("news"));
-
+app.get("/search", (req, res) => {
+  console.log(req.query.q);
+  res.render("search");
+});
+app.post("/search", (req, res) => {
+  console.log(req.body);
+  res.send("");
+});
 //127.0.0.1 - localhost
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
