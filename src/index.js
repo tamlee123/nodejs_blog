@@ -3,10 +3,12 @@ import morgan from "morgan";
 import { engine } from "express-handlebars";
 import path from "path";
 import route from "./routes/index.js";
+import db from "./config/db/index.js";
 
 const app = express();
 const port = 3000;
-
+//Connect to DB
+db.connect();
 const __dirname = path.resolve(); // need to define this for using es6 module
 app.use(express.static(path.join(__dirname, "src/public")));
 
@@ -27,5 +29,5 @@ route(app);
 
 //127.0.0.1 - localhost
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+  console.log(`App listening at http://localhost:${port}`);
 });
