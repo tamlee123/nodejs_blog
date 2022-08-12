@@ -22,7 +22,7 @@ app.use(express.json()); // code javascript: XMLHttpResquest, fetch, axios,...
 //Template engine
 app.engine("hbs", engine({ extname: ".hbs" }));
 app.set("view engine", "hbs");
-app.set("views", path.join(__dirname, "resource", "views"));
+app.set("views", path.join(__dirname, "src/resource/views"));
 
 //Routes init
 route(app);
