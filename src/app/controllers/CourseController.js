@@ -10,7 +10,24 @@ class CourseController {
       })
       .catch(next);
   }
+  //[GET] /courses/create => to render create view
+  create(req, res, next) {
+    res.render("courses/create");
+  }
+
+  //[POST] /courses/store => to add data
+  store(req, res, next) {
+    //res.json(req.body)
+    const formData = req.body;
+    formData.image = `https://img.youtube.com/vi/${req.body.videoId}/sddefault.jpg`;
+    const course = new Course(formData);
+    course
+      .save()
+      .then(() => res.redirect("/"))
+      .catch((error) => {});
+  }
 }
+
 const courseController = new CourseController();
 
 export { courseController };
